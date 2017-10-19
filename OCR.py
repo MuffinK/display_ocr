@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-import tesseract
+import tesserocr as tesseract
 import numpy as np
 import cv2
-import cv2.cv as cv
+import cv2.cv2 as cv
 import time
 import datetime
 from time import strftime
 from collections import Counter
 import ConfigParser
-
+from PIL import Image
 
 def ConfigSectionMap(section):
     global Config
@@ -40,12 +40,14 @@ def OnClose(event):
     stopOpenCv = True
 
 
-def Recognize(iplimage):
+def Recognize(iplimage, displayImg, api):
     global meas_stack
-    tesseract.SetCvImage(iplimage, api)
+    # tesseract.SetCvImage(iplimage, api)
+    tesseract.PyTessBaseAPI.SetImage(api, displayImg)
 
     try:
         full_text = api.GetUTF8Text()
+        print full_text
     except AttributeError:
         full_text = api.GetUNLVText().replace("^", "")
 
@@ -63,9 +65,7 @@ def Recognize(iplimage):
                 up_limit = (float(expected_value)) * (1 + (float(expected_value_desv) / 100))
                 dn_limit = (float(expected_value)) * (1 - (float(expected_value_desv) / 100))
                 if (
-                    len(text) > 0 and
-                    text_val > dn_limit and
-                    text_val < up_limit
+                    len(text) > 0 and text_val > dn_limit and text_val < up_limit
                 ):
                     pass
                 else:
@@ -116,10 +116,10 @@ if __name__ == '__main__':
     # Video capture
     cap = cv2.VideoCapture(0)
     # Tesseract config
-    api = tesseract.TessBaseAPI()
-    api.Init(".", ConfigSectionMap("OCR")['fonttype'], tesseract.OEM_DEFAULT)
+    api = tesseract.PyTessBaseAPI()
+    api.Init(".", ConfigSectionMap("OCR")['fonttype'], tesseract.OEM.DEFAULT)
     api.SetVariable("tessedit_char_whitelist", ConfigSectionMap("OCR")['whitelist'])
-    api.SetPageSegMode(tesseract.PSM_AUTO)
+    api.SetPageSegMode(tesseract.PSM.SINGLE_LINE)
     api.SetVariable("debug_file", "/dev/null")
 
     def nothing(x):
@@ -216,10 +216,11 @@ if __name__ == '__main__':
             #image = wx.ImageFromStream(f)
             #bitmap = wx.BitmapFromImage(image)
             #static_bitmap.SetBitmap(bitmap)
-            iplimage = cv.CreateImageHeader((width, height), cv.IPL_DEPTH_8U, channel)
-            cv.SetData(iplimage, display.tostring(), display.dtype.itemsize * channel * (width))
-            Recognize(iplimage)
-        c = cv.WaitKey(20)
+            # iplimage = cv.CreateImageHeader((width, height), cv.IPL_DEPTH_8U, channel)
+
+            # cv.SetData(iplimage, display.tostring(), display.dtype.itemsize * channel * (width))
+            Recognize( 0, Image.fromarray(display), api) #iplimage)
+        c = cv.waitKey(20)
         if c == "q":
             break
         if stopOpenCv:
