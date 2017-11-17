@@ -192,13 +192,15 @@ def hello_world():
                         get_point((5.0, 0.0), (0.0, 0.0), d3, d1)[1],
                         d1, d2, d3)
     print center
-
-    return (json.dumps({
-        'x': str(center[0]),
-        'y': str(center[1])
-    }), 200, {
-        'content-type': 'application/json'
-    })
+    if center == -1 :
+        return ('', 500)
+    else:
+        return (json.dumps({
+            'x': str(center[0]),
+            'y': str(center[1])
+        }), 200, {
+            'content-type': 'application/json'
+        })
 
 
 app.run(host='0.0.0.0')
