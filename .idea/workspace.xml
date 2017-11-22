@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7ff9feeb-9e1e-4c0a-b06b-a1030c1156a1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trandata/checkpoint" afterPath="$PROJECT_DIR$/trandata/checkpoint" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trandata/rssi_train.py" afterPath="$PROJECT_DIR$/trandata/rssi_train.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +29,8 @@
       <file leaf-file-name="rssi_train.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/trandata/rssi_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1380">
-              <caret line="92" column="31" lean-forward="false" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
+            <state relative-caret-position="348">
+              <caret line="99" column="60" lean-forward="false" selection-start-line="99" selection-start-column="60" selection-end-line="99" selection-end-column="60" />
               <folding>
                 <element signature="e#47#70#0" expanded="true" />
               </folding>
@@ -744,8 +743,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/trandata/rssi_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="92" column="31" lean-forward="false" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
+        <state relative-caret-position="348">
+          <caret line="99" column="60" lean-forward="false" selection-start-line="99" selection-start-column="60" selection-end-line="99" selection-end-column="60" />
           <folding>
             <element signature="e#47#70#0" expanded="true" />
           </folding>

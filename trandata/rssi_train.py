@@ -91,15 +91,17 @@ def tran() :
 
         # # 拟合平面
         for step in xrange(0, 500):
-            if step % 20 == 0:
-                print step, sess.run(W), sess.run(p)
+            # if step % 20 == 0:
+                # print step, sess.run(W), sess.run(p)
             sess.run(train)
 
-        # traned_w = sess.run(W)
-        # traned_p = sess.run(p)
+        traned_w = sess.run(W)
+        traned_p = sess.run(p)
+        print float(str(traned_w[0])), float(str(traned_p[0]))
+
 
     save_path = saver.save(sess, "./trandata/model.ckpt")
-    return (traned_w, traned_p)
+    return (float(traned_w), float(traned_p[0][0]))
 
 
 def getDistance(rssi_value, w, p):
