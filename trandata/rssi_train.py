@@ -97,7 +97,7 @@ def tran() :
 
         traned_w = sess.run(W)
         traned_p = sess.run(p)
-        print float(str(traned_w[0])), float(str(traned_p[0]))
+        print i, ':',  float(str(traned_w[0])),'+' , i , ':', float(str(traned_p[0]))
 
 
     save_path = saver.save(sess, "./trandata/model.ckpt")
@@ -106,6 +106,5 @@ def tran() :
 
 def getDistance(rssi_value, w, p):
     return np.power(10.0, (np.array([rssi_value]) - p) / w).tolist()
-
 
 tran()
