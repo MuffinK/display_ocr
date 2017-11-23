@@ -49,7 +49,7 @@ def get_tran_data():
             distance = item['distance']
             times = times + 1
             y_data[int(minor)-1].append(float(item['distance']))
-            x_data[int(minor)-1].append(float(item['rssi'])/-10)
+            x_data[int(minor)-1].append(float(item['rssi']))
 
     return (np.array(x_data), np.array(y_data))
 

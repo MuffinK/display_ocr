@@ -99,7 +99,7 @@ p = {1: 5.94826,
 #     return (x, y)
 
 def getDistance(rssi_value, W, p):
-    return np.power(10.0, (np.array([rssi_value] / -10) - p) / W).tolist()
+    return np.power(10.0, (np.array([rssi_value] )/-10 - p) / -W).tolist()
 
 
 def sq(x):
@@ -169,16 +169,28 @@ def hello_world():
     minor1 = int(request.form['minor1'])
     minor2 = int(request.form['minor2'])
     minor3 = int(request.form['minor3'])
-    print rssi1, rssi2, rssi3, minor1
-    d1 = getDistance(float(rssi1), W[minor1], p[minor1])[0]
-    d2 = getDistance(float(rssi2), W[minor2], p[minor2])[0]
-    d3 = getDistance(float(rssi3), W[minor3], p[minor3])[0]
+
+    # d1 = getDistance(float(rssi1), W[minor1], p[minor1])[0]
+    # d2 = getDistance(float(rssi2), W[minor2], p[minor2])[0]
+    # d3 = getDistance(float(rssi3), W[minor3], p[minor3])[0]
+    d1 = float(rssi1)
+    d2 = float(rssi2)
+    d3 = float(rssi3)
     print (d1, d2, d3)
 
-    center = get_center(get_point((0.0, 0.0), (0.0, 5.0), d1, d2)[1],
-                        get_point((0.0, 5.0), (5.0, 0.0), d2, d3)[0],
-                        get_point((5.0, 0.0), (0.0, 0.0), d3, d1)[1],
+    if d1 < 0.5:
+        center = ((x[minor1]*d2 + x[minor2]*d1)/(d1+d2), (y[minor1]*d2 + y[minor2]*d1)/(d1+d2))
+    else:
+        if (x[minor2] - x[minor1])*(y[minor3] - y[minor1]) - (y[minor2] - x[minor1])*(x[minor3] - x[minor1]) < 0:
+            center = get_center(get_point((x[minor1], y[minor1]), (x[minor2], y[minor2]), d1, d2)[1],
+                        get_point((x[minor2], y[minor2]), (x[minor3], y[minor3]), d2, d3)[0],
+                        get_point((x[minor3], y[minor3]), (x[minor1], y[minor1]), d3, d1)[1],
                         d1, d2, d3)
+        else:
+            center = get_center(get_point((x[minor1], y[minor1]), (x[minor2], y[minor2]), d1, d2)[0],
+                                get_point((x[minor2], y[minor2]), (x[minor3], y[minor3]), d2, d3)[1],
+                                get_point((x[minor3], y[minor3]), (x[minor1], y[minor1]), d3, d1)[0],
+                                d1, d2, d3)
     print center
     if center == -1:
         return ('', 500)
