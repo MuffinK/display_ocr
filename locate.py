@@ -164,25 +164,30 @@ def hello_world():
     #     return ('', 500)
     print(request)
 
-    for i in request.form:
-        if i[0] == 'rssi1':
-            rssi1 = i[1]
-            break
-        elif i[1] == 'rssi2':
-            rssi2 = i[1]
-            break
-        elif i[1] == 'rssi3':
-            rssi3 = i[1]
-            break
-        elif i[1] == 'minor1':
-            minor1 = i[1]
-            break
-        elif i[1] == 'minor2':
-            minor2 = i[1]
-            break
-        elif i[1] == 'minor3':
-            minor3 = i[1]
-            break
+    # for i in request.form:
+    #     if i[0] == 'rssi1':
+    #         rssi1 = i[1]
+    #         break
+    #     elif i[1] == 'rssi2':
+    #         rssi2 = i[1]
+    #         break
+    #     elif i[1] == 'rssi3':
+    #         rssi3 = i[1]
+    #         break
+    #     elif i[1] == 'minor1':
+    #         minor1 = i[1]
+    #         break
+    #     elif i[1] == 'minor2':
+    #         minor2 = i[1]
+    #         break
+    #     elif i[1] == 'minor3':
+    #         minor3 = i[1]
+    #         break
+    rssi1 = request.form['rssi1']
+    rssi2 = request.form['rssi2']
+    rssi3 = request.form['rssi3']
+    minor1 = request.form['minor1']
+    print rssi1, rssi2, rssi3, minor1
     d1 = getDistance(float(rssi1)/-10, W[minor1], p[minor1])[0]
     d2 = getDistance(float(rssi2)/-10, W[minor2], p[minor2])[0]
     d3 = getDistance(float(rssi3)/-10, W[minor3], p[minor3])[0]
