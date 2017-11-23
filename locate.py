@@ -163,9 +163,29 @@ def hello_world():
     # if (request.form['d1'] == '0') or (request.form['d2'] == '0') or (request.form['d3'] == '0'):
     #     return ('', 500)
     print(request)
-    d1 = getDistance(float(request.form.get('rssi1'))/-10, W[request.form.get('minor1')], p[request.form.get('minor1')])[0]
-    d2 = getDistance(float(request.form.get('rssi2'))/-10, W[request.form.get('minor2')], p[request.form.get('minor2')])[0]
-    d3 = getDistance(float(request.form.get('rssi3'))/-10, W[request.form.get('minor3')], p[request.form.get('minor3')])[0]
+
+    for i in request.form:
+        if i[0] == 'rssi1':
+            rssi1 = i[1]
+            break
+        elif i[1] == 'rssi2':
+            rssi2 = i[1]
+            break
+        elif i[1] == 'rssi3':
+            rssi3 = i[1]
+            break
+        elif i[1] == 'minor1':
+            minor1 = i[1]
+            break
+        elif i[1] == 'minor2':
+            minor2 = i[1]
+            break
+        elif i[1] == 'minor3':
+            minor3 = i[1]
+            break
+    d1 = getDistance(float(rssi1)/-10, W[minor1], p[minor1])[0]
+    d2 = getDistance(float(rssi2)/-10, W[minor2], p[minor2])[0]
+    d3 = getDistance(float(rssi3)/-10, W[minor3], p[minor3])[0]
     print (d1, d2, d3)
 
     center = get_center(get_point((0.0, 0.0), (0.0, 5.0), d1, d2)[1],
