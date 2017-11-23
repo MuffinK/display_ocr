@@ -8,8 +8,15 @@ import numpy as np
 
 app = Flask(__name__)
 
-x = {1: 0, 2: 3, 3: 6, 4: 0, 5: 3, 6: 6, 7: 0, 8: 3, 9: 3}
-y = {1: 0, 2: 0, 3: 0, 4: 3, 5: 3, 6: 3, 7: 6, 8: 6, 9: 6}
+width_gap = 3.1
+height_gap1 = 3.2
+height_gap2 = 3.0
+x = {1: 0, 2: 1*width_gap, 3: 2*width_gap,
+     4: 0, 5: 1*width_gap, 6: 2*width_gap,
+     7: 0, 8: 1*width_gap, 9: 2*width_gap}
+y = {1: 0, 2: 0, 3: 0,
+     4: height_gap1, 5: height_gap1, 6: height_gap1,
+     7: height_gap1 + height_gap2, 8: height_gap1 + height_gap2, 9: height_gap1 + height_gap2}
 
 position = {1: (0, 0), 2: (0, 1), 3: (0, 2),
             4: (1, 0), 5: (1, 1), 6: (1, 2),
