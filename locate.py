@@ -162,9 +162,10 @@ def get_center(point_a, point_b, point_c, d1, d2, d3):
 def hello_world():
     # if (request.form['d1'] == '0') or (request.form['d2'] == '0') or (request.form['d3'] == '0'):
     #     return ('', 500)
-    d1 = getDistance(float(request.form['rssi1'])/-10, W[request.form['minor1']], p[request.form['minor1']])[0]
-    d2 = getDistance(float(request.form['rssi2'])/-10, W[request.form['minor2']], p[request.form['minor2']])[0]
-    d3 = getDistance(float(request.form['rssi3'])/-10, W[request.form['minor3']], p[request.form['minor3']])[0]
+    print(request)
+    d1 = getDistance(float(request.form.get('rssi1'))/-10, W[request.form.get('minor1')], p[request.form.get('minor1')])[0]
+    d2 = getDistance(float(request.form.get('rssi2'))/-10, W[request.form.get('minor2')], p[request.form.get('minor2')])[0]
+    d3 = getDistance(float(request.form.get('rssi3'))/-10, W[request.form.get('minor3')], p[request.form.get('minor3')])[0]
     print (d1, d2, d3)
 
     center = get_center(get_point((0.0, 0.0), (0.0, 5.0), d1, d2)[1],
