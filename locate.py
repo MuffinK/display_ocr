@@ -166,9 +166,9 @@ def hello_world():
     rssi1 = request.form['rssi1']
     rssi2 = request.form['rssi2']
     rssi3 = request.form['rssi3']
-    minor1 = str(request.form['minor1'])
-    minor2 = str(request.form['minor2'])
-    minor3 = str(request.form['minor3'])
+    minor1 = int(request.form['minor1'])
+    minor2 = int(request.form['minor2'])
+    minor3 = int(request.form['minor3'])
     print rssi1, rssi2, rssi3, minor1
     d1 = getDistance(float(rssi1)/-10, W[minor1], p[minor1])[0]
     d2 = getDistance(float(rssi2)/-10, W[minor2], p[minor2])[0]
