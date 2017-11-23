@@ -73,6 +73,8 @@ def tran() :
 
 
     for i in range(1, 31, 1):
+        # x distance
+        # y rssi
         y = log10(np_x_data[i]) * W + p
         loss = tf.reduce_mean(tf.square(y - np_y_data[i]))
         optimizer = tf.train.GradientDescentOptimizer(0.5)

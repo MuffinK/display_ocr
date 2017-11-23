@@ -98,8 +98,8 @@ p = {1: 5.94826,
 #
 #     return (x, y)
 
-def getDistance(rssi_value, minor):
-    return np.power(10.0, (np.array([rssi_value]) / 10 - p[minor]) / W[minor]).tolist()
+def getDistance(rssi_value, W, p):
+    return np.power(10.0, (np.array([rssi_value] / -10) - p) / W).tolist()
 
 
 def sq(x):
@@ -170,9 +170,9 @@ def hello_world():
     minor2 = int(request.form['minor2'])
     minor3 = int(request.form['minor3'])
     print rssi1, rssi2, rssi3, minor1
-    d1 = getDistance(float(rssi1)/-10, W[minor1], p[minor1])[0]
-    d2 = getDistance(float(rssi2)/-10, W[minor2], p[minor2])[0]
-    d3 = getDistance(float(rssi3)/-10, W[minor3], p[minor3])[0]
+    d1 = getDistance(float(rssi1), W[minor1], p[minor1])[0]
+    d2 = getDistance(float(rssi2), W[minor2], p[minor2])[0]
+    d3 = getDistance(float(rssi3), W[minor3], p[minor3])[0]
     print (d1, d2, d3)
 
     center = get_center(get_point((0.0, 0.0), (0.0, 5.0), d1, d2)[1],
