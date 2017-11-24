@@ -9,14 +9,24 @@ import numpy as np
 app = Flask(__name__)
 
 width_gap = 3.1
-height_gap1 = 3.2
-height_gap2 = 3.0
-x = {1: 0, 2: 1*width_gap, 3: 2*width_gap,
-     4: 0, 5: 1*width_gap, 6: 2*width_gap,
-     7: 0, 8: 1*width_gap, 9: 2*width_gap}
-y = {1: 0, 2: 0, 3: 0,
-     4: height_gap1, 5: height_gap1, 6: height_gap1,
-     7: height_gap1 + height_gap2, 8: height_gap1 + height_gap2, 9: height_gap1 + height_gap2}
+height_gap1 = 2.5
+height_gap2 = 2
+x = {1: 0, 2: 1*width_gap,
+     3: 0, 4: 1*width_gap,
+     5: 0, 6: 1*width_gap}
+y = {1: 0, 2: 0,
+     3: height_gap1, 4: height_gap1,
+     5:  height_gap1 + height_gap2, 6:  height_gap1 + height_gap2}
+
+width_gap1 = 4.1
+height_gap11 = 3.5
+height_gap21 = 3.0
+x1 = {1: 0, 2: 1*width_gap1,
+      3: 0, 4: 1*width_gap1,
+      5: 0, 6: 1*width_gap1}
+y1 = {1: 0, 2: 0,
+      3: height_gap11, 4: height_gap11,
+      5: height_gap11 + height_gap21, 6: height_gap11 + height_gap21}
 
 position = {1: (0, 0), 2: (0, 1), 3: (0, 2),
             4: (1, 0), 5: (1, 1), 6: (1, 2),
@@ -189,15 +199,47 @@ def hello_world():
         center = ((x[minor1]*d2 + x[minor2]*d1)/(d1+d2), (y[minor1]*d2 + y[minor2]*d1)/(d1+d2))
     else:
         if (x[minor2] - x[minor1])*(y[minor3] - y[minor1]) - (y[minor2] - x[minor1])*(x[minor3] - x[minor1]) < 0:
-            center = get_center(get_point((x[minor1], y[minor1]), (x[minor2], y[minor2]), d1, d2)[1],
-                        get_point((x[minor2], y[minor2]), (x[minor3], y[minor3]), d2, d3)[0],
-                        get_point((x[minor3], y[minor3]), (x[minor1], y[minor1]), d3, d1)[1],
-                        d1, d2, d3)
-        else:
-            center = get_center(get_point((x[minor1], y[minor1]), (x[minor2], y[minor2]), d1, d2)[0],
-                                get_point((x[minor2], y[minor2]), (x[minor3], y[minor3]), d2, d3)[1],
-                                get_point((x[minor3], y[minor3]), (x[minor1], y[minor1]), d3, d1)[0],
+            point1 = get_point((x[minor1], y[minor1]), (x[minor2], y[minor2]), d1, d2)
+            point2 = get_point((x[minor2], y[minor2]), (x[minor3], y[minor3]), d2, d3)
+            point3 = get_point((x[minor3], y[minor3]), (x[minor1], y[minor1]), d3, d1)
+
+            if point1 != -1 and point2 != -1 and point3 != -1:
+                center = get_center(point1[1],
+                            point2[0],
+                            point3[1],
+                            d1, d2, d3)
+            else:
+                point1 = get_point((x1[minor1], y1[minor1]), (x1[minor2], y1[minor2]), d1, d2)
+                point2 = get_point((x1[minor2], y1[minor2]), (x1[minor3], y1[minor3]), d2, d3)
+                point3 = get_point((x1[minor3], y1[minor3]), (x1[minor1], y1[minor1]), d3, d1)
+
+                if point1 != -1 and point2 != -1 and point3 != -1:
+                    center = get_center(point1[1],
+                                point2[0],
+                                point3[1],
                                 d1, d2, d3)
+
+        else:
+            point1 = get_point((x[minor1], y[minor1]), (x[minor2], y[minor2]), d1, d2)
+            point2 = get_point((x[minor2], y[minor2]), (x[minor3], y[minor3]), d2, d3)
+            point3 = get_point((x[minor3], y[minor3]), (x[minor1], y[minor1]), d3, d1)
+
+            if point1 != -1 and point2 != -1 and point3 != -1:
+                center = get_center(point1[0],
+                                    point2[1],
+                                    point3[0],
+                                    d1, d2, d3)
+            else:
+                point1 = get_point((x1[minor1], y1[minor1]), (x1[minor2], y1[minor2]), d1, d2)
+                point2 = get_point((x1[minor2], y1[minor2]), (x1[minor3], y1[minor3]), d2, d3)
+                point3 = get_point((x1[minor3], y1[minor3]), (x1[minor1], y1[minor1]), d3, d1)
+
+                if point1 != -1 and point2 != -1 and point3 != -1:
+                    center = get_center(point1[0],
+                                        point2[1],
+                                        point3[0],
+                                        d1, d2, d3)
+
     print center
     if center == -1:
         return ('', 500)
