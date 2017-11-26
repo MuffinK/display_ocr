@@ -167,12 +167,19 @@ def get_point(pointA, pointB, dA, dB):
     return ((x3, y3), (x4, y4))
 
 
-def get_center(point_a, point_b, point_c, d1, d2, d3):
+def get_center(point_a, point_b, point_c, d1, d2, d3, left_or_right):
     denominator = 1 / (d1 + d2) + 1 / (d1 + d3) + 1 / (d2 + d3)
-
-    x = (point_a[0] / (d1 + d2) + point_b[0] / (d2 + d3) + point_c[0] / (d1 + d3)) / denominator
-    y = (point_a[1] / (d1 + d2) + point_a[1] / (d2 + d3) + point_a[1] / (d1 + d3)) / denominator
+    if left_or_right == 1:
+        x = (point_a[1][0] / (d1 + d2) + point_b[0][0] / (d2 + d3) + point_c[1][0] / (d1 + d3)) / denominator
+        y = (point_a[1][1] / (d1 + d2) + point_b[0][1] / (d2 + d3) + point_c[1][1] / (d1 + d3)) / denominator
+    elif left_or_right == 2:
+        x = (point_a[0][0] / (d1 + d2) + point_b[1][0] / (d2 + d3) + point_c[0][0] / (d1 + d3)) / denominator
+        y = (point_a[0][1] / (d1 + d2) + point_b[1][1] / (d2 + d3) + point_c[0][1] / (d1 + d3)) / denominator
     return (x, y)
+
+
+def one_point_location(minor1, minor2, d1, d2):
+    return  ((x[minor1] * d2 + x[minor2] * d1) / (d1 + d2), (y[minor1] * d2 + y[minor2] * d1) / (d1 + d2))
 
 
 @app.route('/position', methods=['POST', 'GET'])
@@ -194,51 +201,34 @@ def hello_world():
     d2 = float(rssi2)
     d3 = float(rssi3)
     print (d1, d2, d3)
-
+    # center = (0, 0)
     if d1 < 0.5:
-        center = ((x[minor1]*d2 + x[minor2]*d1)/(d1+d2), (y[minor1]*d2 + y[minor2]*d1)/(d1+d2))
+        center = one_point_location(minor1, minor2, d1, d2)
     else:
-        if (x[minor2] - x[minor1])*(y[minor3] - y[minor1]) - (y[minor2] - x[minor1])*(x[minor3] - x[minor1]) < 0:
-            point1 = get_point((x[minor1], y[minor1]), (x[minor2], y[minor2]), d1, d2)
-            point2 = get_point((x[minor2], y[minor2]), (x[minor3], y[minor3]), d2, d3)
-            point3 = get_point((x[minor3], y[minor3]), (x[minor1], y[minor1]), d3, d1)
 
-            if point1 != -1 and point2 != -1 and point3 != -1:
-                center = get_center(point1[1],
-                            point2[0],
-                            point3[1],
-                            d1, d2, d3)
+        point1 = get_point((x[minor1], y[minor1]), (x[minor2], y[minor2]), d1, d2)
+        point2 = get_point((x[minor2], y[minor2]), (x[minor3], y[minor3]), d2, d3)
+        point3 = get_point((x[minor3], y[minor3]), (x[minor1], y[minor1]), d3, d1)
+
+        if point1 != -1 and point2 != -1 and point3 != -1:
+            if (x[minor2] - x[minor1]) * (y[minor3] - y[minor1]) - (y[minor2] - x[minor1]) * (x[minor3] - x[minor1]) < 0:
+                center = get_center(point1, point2, point3, d1, d2, d3, 1)
             else:
-                point1 = get_point((x1[minor1], y1[minor1]), (x1[minor2], y1[minor2]), d1, d2)
-                point2 = get_point((x1[minor2], y1[minor2]), (x1[minor3], y1[minor3]), d2, d3)
-                point3 = get_point((x1[minor3], y1[minor3]), (x1[minor1], y1[minor1]), d3, d1)
-
-                if point1 != -1 and point2 != -1 and point3 != -1:
-                    center = get_center(point1[1],
-                                point2[0],
-                                point3[1],
-                                d1, d2, d3)
+                center = get_center(point1[0], point2[1], point3[0], d1, d2, d3, 2)
 
         else:
-            point1 = get_point((x[minor1], y[minor1]), (x[minor2], y[minor2]), d1, d2)
-            point2 = get_point((x[minor2], y[minor2]), (x[minor3], y[minor3]), d2, d3)
-            point3 = get_point((x[minor3], y[minor3]), (x[minor1], y[minor1]), d3, d1)
+            point1 = get_point((x1[minor1], y1[minor1]), (x1[minor2], y1[minor2]), d1, d2)
+            point2 = get_point((x1[minor2], y1[minor2]), (x1[minor3], y1[minor3]), d2, d3)
+            point3 = get_point((x1[minor3], y1[minor3]), (x1[minor1], y1[minor1]), d3, d1)
 
             if point1 != -1 and point2 != -1 and point3 != -1:
-                center = get_center(point1[0],
-                                    point2[1],
-                                    point3[0],
-                                    d1, d2, d3)
-            else:
-                point1 = get_point((x1[minor1], y1[minor1]), (x1[minor2], y1[minor2]), d1, d2)
-                point2 = get_point((x1[minor2], y1[minor2]), (x1[minor3], y1[minor3]), d2, d3)
-                point3 = get_point((x1[minor3], y1[minor3]), (x1[minor1], y1[minor1]), d3, d1)
+                if (x[minor2] - x[minor1]) * (y[minor3] - y[minor1]) - (y[minor2] - x[minor1]) * ( x[minor3] - x[minor1]) < 0:
+                    center = get_center(point1[1], point2[0], point3[1], d1, d2, d3, 1)
+                else:
+                    center = get_center(point1[0], point2[1], point3[0], d1, d2, d3, 2)
 
-                if point1 != -1 and point2 != -1 and point3 != -1:
-                    center = get_center(point1[0],
-                                        point2[1],
-                                        point3[0],
-                                        d1, d2, d3)
+            else:
+                center = one_point_location(minor1, minor2, d1, d2)
 
     print center
     if center == -1:
