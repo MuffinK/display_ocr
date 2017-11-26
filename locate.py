@@ -214,7 +214,7 @@ def hello_world():
             if (x[minor2] - x[minor1]) * (y[minor3] - y[minor1]) - (y[minor2] - x[minor1]) * (x[minor3] - x[minor1]) < 0:
                 center = get_center(point1, point2, point3, d1, d2, d3, 1)
             else:
-                center = get_center(point1[0], point2[1], point3[0], d1, d2, d3, 2)
+                center = get_center(point1, point2, point3, d1, d2, d3, 2)
 
         else:
             point1 = get_point((x1[minor1], y1[minor1]), (x1[minor2], y1[minor2]), d1, d2)
@@ -223,9 +223,9 @@ def hello_world():
 
             if point1 != -1 and point2 != -1 and point3 != -1:
                 if (x[minor2] - x[minor1]) * (y[minor3] - y[minor1]) - (y[minor2] - x[minor1]) * ( x[minor3] - x[minor1]) < 0:
-                    center = get_center(point1[1], point2[0], point3[1], d1, d2, d3, 1)
+                    center = get_center(point1, point2, point3, d1, d2, d3, 1)
                 else:
-                    center = get_center(point1[0], point2[1], point3[0], d1, d2, d3, 2)
+                    center = get_center(point1, point2, point3, d1, d2, d3, 2)
 
             else:
                 center = one_point_location(minor1, minor2, d1, d2)
