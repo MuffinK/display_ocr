@@ -12,13 +12,13 @@ width_gap = 2.2
 # width_gap2 = 3.30
 height_gap = 3.3
 # height_gap2 = 2.5
-x = {1: 0, 2: 1*width_gap, 3:2*width_gap, 5:3*width_gap, 6:4*width_gap, 7:5*width_gap, 8:6*width_gap,
-     9: 0, 10: 1*width_gap, 11:2*width_gap, 12:3*width_gap, 13:4*width_gap, 14:5*width_gap, 15:6*width_gap,
-     16: 0, 17: 1*width_gap, 18:2*width_gap, 19:3*width_gap, 20:4*width_gap, 21:5*width_gap, 22:6*width_gap}
+x = {2: 0, 3: 1*width_gap, 5:2*width_gap, 6:3*width_gap, 7:4*width_gap, 8:5*width_gap, 9:6*width_gap,
+     10: 0, 11: 1*width_gap, 12:2*width_gap, 13:3*width_gap, 14:4*width_gap, 15:5*width_gap, 16:6*width_gap,
+     17: 0, 18: 1*width_gap, 19:2*width_gap, 20:3*width_gap, 21:4*width_gap, 22:5*width_gap, 23:6*width_gap}
 
-y = {1: 0, 2: 0, 3:0, 5:0, 6:0, 7:0, 8:0,
-     9: height_gap, 10: height_gap, 11:height_gap, 12:height_gap, 13:height_gap, 14:height_gap, 15:height_gap,
-     16: height_gap*2, 17: height_gap*2, 18:height_gap*2, 19:height_gap*2, 20:height_gap*2, 21:height_gap*2, 22:height_gap*2}
+y = {2: 0, 3: 0, 5:0, 6:0, 7:0, 8:0, 9:0,
+     10: height_gap, 11: height_gap, 12:height_gap, 13:height_gap, 14:height_gap, 15:height_gap, 16:height_gap,
+     17: height_gap*2, 18: height_gap*2, 19:height_gap*2, 20:height_gap*2, 21:height_gap*2, 22:height_gap*2, 23:height_gap*2}
 
 width_gap1 = 4.6
 height_gap11 = 4
