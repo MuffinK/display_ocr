@@ -24,10 +24,10 @@ height_gap11 = 4
 height_gap21 = 3.5
 x = {28: 0, 30: 1*width_gap1,
      6: 0, 8: 1*width_gap1,
-     30: 0.5*width_gap1}
+     29: 0.5*width_gap1}
 y = {28: 0, 30: 0,
      6: height_gap11, 8: height_gap11,
-     30: height_gap11 + height_gap21}
+     29: height_gap11 + height_gap21}
 
 position = {1: (0, 0), 2: (0, 1), 3: (0, 2),
             4: (1, 0), 5: (1, 1), 6: (1, 2),
