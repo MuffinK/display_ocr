@@ -14,10 +14,10 @@ height_gap1 = 3
 height_gap2 = 2.5
 x = {28: 0, 30: 1*width_gap,
      6: 0, 8: 1*width_gap,
-     30: width_gap2}
+     29: width_gap2}
 y = {28: 0, 30: 0,
      6: height_gap1, 8: height_gap1,
-     30: height_gap1 + height_gap2}
+     29: height_gap1 + height_gap2}
 
 width_gap1 = 4.6
 height_gap11 = 4
