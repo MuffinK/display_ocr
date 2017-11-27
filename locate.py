@@ -22,10 +22,10 @@ y = {28: 0, 30: 0,
 width_gap1 = 4.6
 height_gap11 = 4
 height_gap21 = 3.5
-x = {28: 0, 30: 1*width_gap1,
+x1 = {28: 0, 30: 1*width_gap1,
      6: 0, 8: 1*width_gap1,
      29: 0.5*width_gap1}
-y = {28: 0, 30: 0,
+y1 = {28: 0, 30: 0,
      6: height_gap11, 8: height_gap11,
      29: height_gap11 + height_gap21}
 
