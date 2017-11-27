@@ -218,19 +218,19 @@ def hello_world():
             else:
                 center = get_center(point1, point2, point3, d1, d2, d3, 2)
 
+        # else:
+        #     point1 = get_point((x1[minor1], y1[minor1]), (x1[minor2], y1[minor2]), d1, d2)
+        #     point2 = get_point((x1[minor2], y1[minor2]), (x1[minor3], y1[minor3]), d2, d3)
+        #     point3 = get_point((x1[minor3], y1[minor3]), (x1[minor1], y1[minor1]), d3, d1)
+        #
+        #     if point1 != -1 and point2 != -1 and point3 != -1:
+        #         if (x[minor2] - x[minor1]) * (y[minor3] - y[minor1]) - (y[minor2] - x[minor1]) * ( x[minor3] - x[minor1]) < 0:
+        #             center = get_center(point1, point2, point3, d1, d2, d3, 1)
+        #         else:
+        #             center = get_center(point1, point2, point3, d1, d2, d3, 2)
+
         else:
-            point1 = get_point((x1[minor1], y1[minor1]), (x1[minor2], y1[minor2]), d1, d2)
-            point2 = get_point((x1[minor2], y1[minor2]), (x1[minor3], y1[minor3]), d2, d3)
-            point3 = get_point((x1[minor3], y1[minor3]), (x1[minor1], y1[minor1]), d3, d1)
-
-            if point1 != -1 and point2 != -1 and point3 != -1:
-                if (x[minor2] - x[minor1]) * (y[minor3] - y[minor1]) - (y[minor2] - x[minor1]) * ( x[minor3] - x[minor1]) < 0:
-                    center = get_center(point1, point2, point3, d1, d2, d3, 1)
-                else:
-                    center = get_center(point1, point2, point3, d1, d2, d3, 2)
-
-            else:
-                center = one_point_location(minor1, minor2, d1, d2)
+            center = one_point_location(minor1, minor2, d1, d2)
 
     print center
     if center == -1:
